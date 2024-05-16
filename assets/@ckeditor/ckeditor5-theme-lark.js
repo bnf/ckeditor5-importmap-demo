@@ -1,0 +1,1 @@
+var t,a="",e="";void 0===t&&(t={}),t.insertAt;export{a as default,e as stylesheet};
