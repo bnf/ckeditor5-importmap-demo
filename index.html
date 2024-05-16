@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="importmap">
+      {
+        "imports": {
+          "lodash-es": "./assets/lodash-es.js",
+          "@ckeditor/ckeditor5-alignment": "./assets/@ckeditor/ckeditor5-alignment.js",
+          "@ckeditor/ckeditor5-autoformat": "./assets/@ckeditor/ckeditor5-autoformat.js",
+          "@ckeditor/ckeditor5-basic-styles": "./assets/@ckeditor/ckeditor5-basic-styles.js",
+          "@ckeditor/ckeditor5-block-quote": "./assets/@ckeditor/ckeditor5-block-quote.js",
+          "@ckeditor/ckeditor5-clipboard": "./assets/@ckeditor/ckeditor5-clipboard.js",
+          "@ckeditor/ckeditor5-code-block": "./assets/@ckeditor/ckeditor5-code-block.js",
+          "@ckeditor/ckeditor5-core": "./assets/@ckeditor/ckeditor5-core.js",
+          "@ckeditor/ckeditor5-editor-classic": "./assets/@ckeditor/ckeditor5-editor-classic.js",
+          "@ckeditor/ckeditor5-engine": "./assets/@ckeditor/ckeditor5-engine.js",
+          "@ckeditor/ckeditor5-enter": "./assets/@ckeditor/ckeditor5-enter.js",
+          "@ckeditor/ckeditor5-essentials": "./assets/@ckeditor/ckeditor5-essentials.js",
+          "@ckeditor/ckeditor5-find-and-replace": "./assets/@ckeditor/ckeditor5-find-and-replace.js",
+          "@ckeditor/ckeditor5-font": "./assets/@ckeditor/ckeditor5-font.js",
+          "@ckeditor/ckeditor5-heading": "./assets/@ckeditor/ckeditor5-heading.js",
+          "@ckeditor/ckeditor5-horizontal-line": "./assets/@ckeditor/ckeditor5-horizontal-line.js",
+          "@ckeditor/ckeditor5-html-support": "./assets/@ckeditor/ckeditor5-html-support.js",
+          "@ckeditor/ckeditor5-indent": "./assets/@ckeditor/ckeditor5-indent.js",
+          "@ckeditor/ckeditor5-inspector": "./assets/@ckeditor/ckeditor5-inspector.js",
+          "@ckeditor/ckeditor5-link": "./assets/@ckeditor/ckeditor5-link.js",
+          "@ckeditor/ckeditor5-list": "./assets/@ckeditor/ckeditor5-list.js",
+          "@ckeditor/ckeditor5-paragraph": "./assets/@ckeditor/ckeditor5-paragraph.js",
+          "@ckeditor/ckeditor5-paste-from-office": "./assets/@ckeditor/ckeditor5-paste-from-office.js",
+          "@ckeditor/ckeditor5-remove-format": "./assets/@ckeditor/ckeditor5-remove-format.js",
+          "@ckeditor/ckeditor5-select-all": "./assets/@ckeditor/ckeditor5-select-all.js",
+          "@ckeditor/ckeditor5-show-blocks": "./assets/@ckeditor/ckeditor5-show-blocks.js",
+          "@ckeditor/ckeditor5-source-editing": "./assets/@ckeditor/ckeditor5-source-editing.js",
+          "@ckeditor/ckeditor5-special-characters": "./assets/@ckeditor/ckeditor5-special-characters.js",
+          "@ckeditor/ckeditor5-style": "./assets/@ckeditor/ckeditor5-style.js",
+          "@ckeditor/ckeditor5-table": "./assets/@ckeditor/ckeditor5-table.js",
+          "@ckeditor/ckeditor5-theme-lark": "./assets/@ckeditor/ckeditor5-theme-lark.js",
+          "@ckeditor/ckeditor5-typing": "./assets/@ckeditor/ckeditor5-typing.js",
+          "@ckeditor/ckeditor5-ui": "./assets/@ckeditor/ckeditor5-ui.js",
+          "@ckeditor/ckeditor5-undo": "./assets/@ckeditor/ckeditor5-undo.js",
+          "@ckeditor/ckeditor5-upload": "./assets/@ckeditor/ckeditor5-upload.js",
+          "@ckeditor/ckeditor5-utils": "./assets/@ckeditor/ckeditor5-utils.js",
+          "@ckeditor/ckeditor5-watchdog": "./assets/@ckeditor/ckeditor5-watchdog.js",
+          "@ckeditor/ckeditor5-widget": "./assets/@ckeditor/ckeditor5-widget.js",
+          "@ckeditor/ckeditor5-word-count": "./assets/@ckeditor/ckeditor5-word-count.js"
+        }
+      }
+    </script>
+    <script type="module" src="index.js" async></script>
+    <style>
+    .ck-editor__editable_inline {
+        min-height: 400px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Demo CKEditor with dynamic plugins loaded via native ES6 imports (from an importmap)</h1>
+    <demo-ckeditor></demo-ckeditor>
+  </body>
+</html>
