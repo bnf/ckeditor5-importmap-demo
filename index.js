@@ -1,27 +1,47 @@
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
-/* Demo for dynamic list of plugins, could be loaded from an endpoint or injected as runtime config */
+import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
+import { Essentials } from '@ckeditor/ckeditor5-essentials';
+import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
+import { Heading } from '@ckeditor/ckeditor5-heading';
+import { Indent } from '@ckeditor/ckeditor5-indent';
+import { Link } from '@ckeditor/ckeditor5-link';
+import { List } from '@ckeditor/ckeditor5-list';
+import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import { PastePlainText } from '@ckeditor/ckeditor5-clipboard';
+import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
+import { RemoveFormat } from '@ckeditor/ckeditor5-remove-format';
+import { Table, TableToolbar, TableProperties, TableCellProperties, TableCaption } from '@ckeditor/ckeditor5-table';
+import { TextTransformation } from '@ckeditor/ckeditor5-typing';
+import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
+import { Alignment } from '@ckeditor/ckeditor5-alignment';
+import { Style } from '@ckeditor/ckeditor5-style';
+import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
+import { Bold, Italic, Subscript, Superscript, Strikethrough, Underline } from '@ckeditor/ckeditor5-basic-styles';
+import { SpecialCharacters, SpecialCharactersEssentials } from '@ckeditor/ckeditor5-special-characters';
+import { HorizontalLine } from '@ckeditor/ckeditor5-horizontal-line';
+
 const plugins = [
-  { module: '@ckeditor/ckeditor5-block-quote', exports: ['BlockQuote'] },
-  { module: '@ckeditor/ckeditor5-essentials', exports: ['Essentials'] },
-  { module: '@ckeditor/ckeditor5-find-and-replace', exports: ['FindAndReplace'] },
-  { module: '@ckeditor/ckeditor5-heading', exports: ['Heading'] },
-  { module: '@ckeditor/ckeditor5-indent', exports: ['Indent'] },
-  { module: '@ckeditor/ckeditor5-link', exports: ['Link'] },
-  { module: '@ckeditor/ckeditor5-list', exports: ['List'] },
-  { module: '@ckeditor/ckeditor5-paragraph', exports: ['Paragraph'] },
-  { module: '@ckeditor/ckeditor5-clipboard', exports: ['PastePlainText'] },
-  { module: '@ckeditor/ckeditor5-paste-from-office', exports: ['PasteFromOffice'] },
-  { module: '@ckeditor/ckeditor5-remove-format', exports: ['RemoveFormat'] },
-  { module: '@ckeditor/ckeditor5-table', exports: ['Table', 'TableToolbar', 'TableProperties', 'TableCellProperties', 'TableCaption'] },
-  { module: '@ckeditor/ckeditor5-typing', exports: ['TextTransformation'] },
-  { module: '@ckeditor/ckeditor5-source-editing', exports: ['SourceEditing'] },
-  { module: '@ckeditor/ckeditor5-alignment', exports: ['Alignment'] },
-  { module: '@ckeditor/ckeditor5-style', exports: ['Style'] },
-  { module: '@ckeditor/ckeditor5-html-support', exports: ['GeneralHtmlSupport'] },
-  { module: '@ckeditor/ckeditor5-basic-styles', exports: ['Bold', 'Italic', 'Subscript', 'Superscript', 'Strikethrough', 'Underline'] },
-  { module: '@ckeditor/ckeditor5-special-characters', exports: ['SpecialCharacters', 'SpecialCharactersEssentials'] },
-  { module: '@ckeditor/ckeditor5-horizontal-line', exports: ['HorizontalLine'] },
+  BlockQuote,
+  Essentials,
+  FindAndReplace,
+  Heading,
+  Indent,
+  Link,
+  List,
+  Paragraph,
+  PastePlainText,
+  PasteFromOffice,
+  RemoveFormat,
+  Table, TableToolbar, TableProperties, TableCellProperties, TableCaption,
+  TextTransformation,
+  SourceEditing,
+  Alignment,
+  Style,
+  GeneralHtmlSupport,
+  Bold, Italic, Subscript, Superscript, Strikethrough, Underline,
+  SpecialCharacters, SpecialCharactersEssentials,
+  HorizontalLine,
 ];
 
 const toolbar = {
@@ -29,8 +49,6 @@ const toolbar = {
     "heading",
     "|",
     "style",
-    "fontFamily",
-    "fontSize",
     "|",
     "bold",
     "italic",
@@ -38,7 +56,6 @@ const toolbar = {
     "strikethrough",
     "subscript",
     "superscript",
-    "softhyphen",
     "|",
     "numberedList",
     "bulletedList",
@@ -52,7 +69,6 @@ const toolbar = {
     "alignment:center",
     "alignment:right",
     "alignment:justify",
-    "-",
     "link",
     "|",
     "removeFormat",
@@ -60,11 +76,9 @@ const toolbar = {
     "undo",
     "redo",
     "|",
-    "insertImage",
     "insertTable",
     "horizontalLine",
     "specialCharacters",
-    "pageBreak",
     "|",
     "sourceEditing"
   ],
@@ -74,7 +88,6 @@ const toolbar = {
     "strikethrough",
     "alignment:justify"
   ],
-  "shouldNotGroupWhenFull":false
 };
 
 class DemoCKEditor extends HTMLElement
@@ -84,44 +97,10 @@ class DemoCKEditor extends HTMLElement
     this.append(textarea);
 
     await ClassicEditor.create(textarea, {
-      plugins: await this.#resolvePlugins(plugins),
+      plugins,
       toolbar,
     });
   }
-
-  async #resolvePlugins(plugins) {
-   const pluginModules = await Promise.all(
-     plugins.map(async (moduleDescriptor) => {
-       try {
-         return {
-           module: await import(moduleDescriptor.module),
-           exports: moduleDescriptor.exports,
-         }
-       } catch (e) {
-         console.error(`Failed to load CKEditor5 module ${moduleDescriptor.module}`, e);
-         return {
-           module: null,
-           exports: []
-         }
-       }
-     })
-   );
-
-   const declaredPlugins = [];
-   pluginModules.forEach(({ module, exports }) => {
-     for (const exportName of exports) {
-       if (exportName in module) {
-         declaredPlugins.push(module[exportName]);
-       } else {
-         console.error(`CKEditor5 plugin export "${exportName}" not available in`, module);
-       }
-     }
-   });
-
-  console.log(declaredPlugins);
-
-   return declaredPlugins;
- }
 }
 
 window.customElements.define('demo-ckeditor', DemoCKEditor);
